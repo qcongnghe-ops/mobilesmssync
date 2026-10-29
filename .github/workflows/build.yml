@@ -1,4 +1,4 @@
-name: Tạo File APK
+name: Android CI
 
 on:
   push:
@@ -29,11 +29,6 @@ jobs:
       run: |
         mkdir -p ~/.android
         keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-
-    - name: Extract SHA-1 Fingerprint
-      run: |
-        keytool -list -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey
-
     - name: Build Debug APK
       run: gradle assembleDebug
 
