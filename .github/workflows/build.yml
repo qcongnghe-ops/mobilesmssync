@@ -1,0 +1,37 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Kiểm tra mã nguồn (Checkout)
+      uses: actions/checkout@v4
+
+    - name: Cài đặt môi trường JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17' # Đã nâng cấp lên bản 17 để phù hợp với SDK mới
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Cấp quyền thực thi cho gradlew
+      run: chmod +x gradlew
+
+    - name: Trích xuất và Hiển thị mã SHA-1
+      run: ./gradlew signingReport
+
+    - name: Biên dịch ứng dụng ra file APK
+      run: ./gradlew assembleDebug
+
+    - name: Đóng gói và Tạo liên kết tải về file APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: Ung-Dung-SMS-Sync-APK
+        path: app/build/outputs/apk/debug/app-debug.apk
