@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://android.com">
 
-    <!-- Khai báo các quyền hệ thống đọc và nhận tin nhắn SMS -->
+    <!-- Cấp các quyền đọc và nhận tin nhắn cho ứng dụng -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         
-        <!-- Màn hình giao diện chính điều khiển của ứng dụng -->
+        <!-- Cấu hình màn hình điều khiển chính Activity -->
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Bộ nhận tín hiệu chạy ngầm để bắt nội dung SMS tự động -->
+        <!-- Cấu hình bộ nhận tín hiệu tin nhắn SMS ngầm -->
         <receiver android:name=".SmsReceiver" android:exported="true" android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
