@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateUIForUser() {
         val user = auth.currentUser
         if (user != null) {
-            tvUserStatus.text = "Tài khoản: \${user.email}"
+            tvUserStatus.text = "Tài khoản: ${user.email}"
             btnGoogleSignIn.text = "Đăng xuất"
             btnGoogleSignIn.setOnClickListener {
                 auth.signOut()
@@ -136,12 +136,12 @@ class MainActivity : AppCompatActivity() {
                                 Toast.makeText(this@MainActivity, "Đăng nhập Google thành công!", Toast.LENGTH_SHORT).show()
                                 updateUIForUser()
                             } else {
-                                Toast.makeText(this@MainActivity, "Lỗi Firebase: \${task.exception?.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@MainActivity, "Lỗi Firebase: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                             }
                         }
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "Lỗi: \${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Lỗi: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -159,10 +159,10 @@ class MainActivity : AppCompatActivity() {
                   for (doc in snapshots) {
                       val address = doc.getString("address") ?: "Không rõ"
                       val body = doc.getString("body") ?: ""
-                      val device = doc.getString("deviceId") ?: "Thiết bị ẩn danh"
+                      val device = doc.getString("deviceId") ?: "Thiết Thi bị ẩn danh"
                       
-                      smsList.add("SĐT: \$address \n[Gửi từ: \$device]")
-                      smsFullContent.add("Người gửi: \$address\nThiết bị: \$device\n\nNội dung SMS:\n\$body")
+                      smsList.add("SĐT: $address \n[Gửi từ: $device]")
+                      smsFullContent.add("Người gửi: $address\nThiết bị: $device\n\nNội dung SMS:\n$body")
                   }
                   adapter.notifyDataSetChanged()
               }
