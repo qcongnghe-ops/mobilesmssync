@@ -11,33 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Kiểm tra mã nguồn (Checkout)
+    - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Cài đặt môi trường JDK 17
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '17' # Đã nâng cấp lên bản 17 để phù hợp với SDK mới
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
-    - name: Cấp quyền thực thi cho gradlew
+    - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Trích xuất và Hiển thị mã SHA-1
+    - name: Extract SHA-1 Fingerprint
       run: ./gradlew signingReport
 
-    - name: Biên dịch ứng dụng ra file APK
+    - name: Build Debug APK
       run: ./gradlew assembleDebug
 
-    - name: Đóng gói và Tạo liên kết tải về file APK
+    - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Ung-Dung-SMS-Sync-APK
-        path: app/build/outputs/apk/debug/app-debug.apk
-    - name: Trích xuất mã SHA-1 của Ứng dụng
-        run: ./gradlew signingReport
-
-    - name: Hiển thị kết quả SHA-1
-        run: |
-          echo "Hãy mở mục log của bước này để copy chuỗi SHA-1"
+        name: sms-sync-app-apk
+        path: |
+          app/build/outputs/apk/debug/app-debug.apk
