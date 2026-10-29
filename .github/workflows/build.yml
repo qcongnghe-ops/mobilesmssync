@@ -20,20 +20,18 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Ép buộc GitHub Actions dùng đúng phiên bản Gradle 8.2 để không bị lỗi bản 9.x
+    # Sử dụng hành động chính thức để tự cấu hình Gradle mà không phụ thuộc file .jar bị thiếu
     - name: Setup Gradle 8.2
       uses: gradle/actions/setup-gradle@v4
       with:
         gradle-version: '8.2'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
+    # Sử dụng trực tiếp lệnh 'gradle' của hệ thống thay vì './gradlew' cục bộ
     - name: Extract SHA-1 Fingerprint
-      run: ./gradlew signingReport
+      run: gradle signingReport
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: gradle assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
