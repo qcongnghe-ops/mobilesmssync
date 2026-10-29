@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "728642804006-2i3nvr3fpehhbjbvcv2cudqaap4a525r.apps.googleusercontent.com",
+          "client_id": "728642804006-s1l25rus213p1kbjkmvt90nnid8p57dr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.lcn.msmssync",
-            "certificate_hash": "f8744beb7d5b8e03ea8eb5fa0774c1b527fc3055"
+            "certificate_hash": "25b142becf10122330624ecf07611330df5d83c4"
           }
         },
         {
