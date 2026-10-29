@@ -20,13 +20,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Sử dụng hành động chính thức để tự cấu hình Gradle mà không phụ thuộc file .jar bị thiếu
     - name: Setup Gradle 8.2
       uses: gradle/actions/setup-gradle@v4
       with:
         gradle-version: '8.2'
 
-    # Sử dụng trực tiếp lệnh 'gradle' của hệ thống thay vì './gradlew' cục bộ
+    # Bước sửa lỗi: Tự động tạo tệp debug.keystore cho máy ảo GitHub
+    - name: Generate Debug Keystore
+      run: |
+        mkdir -p ~/.android
+        keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
     - name: Extract SHA-1 Fingerprint
       run: gradle signingReport
 
