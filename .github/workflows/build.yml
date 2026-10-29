@@ -1,21 +1,36 @@
 name: Android CI
+
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
-    - run: chmod +x gradlew
-    - run: ./gradlew signingReport
-    - run: ./gradlew assembleDebug
-    - uses: actions/upload-artifact@v4
+
+    - name: Setup Gradle and Build Wrapper
+      run: gradle wrapper
+
+    - name: Extract SHA-1 Fingerprint
+      run: ./gradlew signingReport
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
       with:
-        name: apk
-        path: app/build/outputs/apk/debug/smssync.apk
+        name: sms-sync-app-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
