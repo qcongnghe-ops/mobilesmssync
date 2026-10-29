@@ -1,4 +1,4 @@
-name: Android CI
+name: Tạo File APK
 
 on:
   push:
@@ -30,7 +30,16 @@ jobs:
         mkdir -p ~/.android
         keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
-    # Bước sửa lỗi: Đọc trực tiếp SHA-1 bằng công cụ keytool hệ thống
     - name: Extract SHA-1 Fingerprint
       run: |
         keytool -list -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey
+
+    - name: Build Debug APK
+      run: gradle assembleDebug
+
+    # Sử dụng cấu hình tìm kiếm thông minh để quét mọi file .apk được sinh ra trong mọi cấu trúc thư mục
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sms-sync-app-apk
+        path: "**/build/outputs/apk/debug/*.apk"
