@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728642804006",
+    "project_id": "sms-sync-multi-devices",
+    "storage_bucket": "sms-sync-multi-devices.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728642804006:android:e88e9135fe349b385409e7",
+        "android_client_info": {
+          "package_name": "com.lcn.msmssync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUJER6VhmM_PX5sTFRMeFFZlyaZCWVCYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
