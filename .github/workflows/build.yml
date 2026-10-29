@@ -35,3 +35,9 @@ jobs:
       with:
         name: Ung-Dung-SMS-Sync-APK
         path: app/build/outputs/apk/debug/app-debug.apk
+    - name: Trích xuất mã SHA-1 của Ứng dụng
+        run: ./gradlew signingReport
+
+    - name: Hiển thị kết quả SHA-1
+        run: |
+          echo "Hãy mở mục log của bước này để copy chuỗi SHA-1"
