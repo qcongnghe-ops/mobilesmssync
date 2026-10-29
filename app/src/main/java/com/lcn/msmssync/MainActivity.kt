@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun signInWithGoogle() {
         val credentialManager = CredentialManager.create(this)
-        val serverClientId = "728642804006-xxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com" 
+        val serverClientId = "728642804006-kcn3hc5vbad7tb6j0208f9ddsj6hohtv.apps.googleusercontent.com" 
 
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
