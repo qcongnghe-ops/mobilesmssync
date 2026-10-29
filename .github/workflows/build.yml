@@ -24,17 +24,12 @@ jobs:
       uses: gradle/actions/setup-gradle@v4
       with:
         gradle-version: '8.2'
-
-    - name: Generate Debug Keystore
-      run: |
-        mkdir -p ~/.android
-        keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+        
     - name: Build Debug APK
       run: gradle assembleDebug
 
-    # Sử dụng cấu hình tìm kiếm thông minh để quét mọi file .apk được sinh ra trong mọi cấu trúc thư mục
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: sms-sync-app-apk
-        path: "**/build/outputs/apk/debug/*.apk"
+        path: app/build/outputs/apk/debug/app-debug.apk
